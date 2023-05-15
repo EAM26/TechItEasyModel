@@ -48,6 +48,23 @@ public class TelevisionService {
         }
     }
 
+    public void updateTelevision(Long id, TelevisionDtoInput televisionDtoInput) {
+        Television television = repos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
+        if(televisionDtoInput.getName() != null) {
+            television.setName(televisionDtoInput.getName());
+        }
+        if(televisionDtoInput.getBrand() != null) {
+            television.setBrand(televisionDtoInput.getBrand());
+        }
+        if(televisionDtoInput.getType() != null) {
+            television.setType(televisionDtoInput.getType());
+        }
+        if(televisionDtoInput.getPrice() != null) {
+            television.setPrice(televisionDtoInput.getPrice());
+        }
+        repos.save(television);
+    }
+
 
 
 

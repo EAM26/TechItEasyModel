@@ -25,7 +25,7 @@ public class TelevisionController {
 
     private final TelevisionService service;
 
-    public TelevisionController(TelevisionService service){
+    public TelevisionController(TelevisionService service) {
         this.service = service;
     }
 
@@ -43,14 +43,9 @@ public class TelevisionController {
 
 
     @PostMapping
-    public ResponseEntity<String> createTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, BindingResult br)  {
+    public ResponseEntity<String> createTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, BindingResult br) {
         if (br.hasFieldErrors()) {
-            StringBuilder sb = new StringBuilder();
-            for (FieldError fe : br.getFieldErrors()) {
-                sb.append(fe.getDefaultMessage());
-                sb.append("\n");
-            }
-            return ResponseEntity.badRequest().body(sb.toString());
+            return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
         Television tv = service.createTelevision(televisionDtoInput);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionDtoInput.Id).toUriString());
@@ -65,19 +60,21 @@ public class TelevisionController {
     }
 
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> updateTelevision(@RequestBody Television tv, @PathVariable Long id) {
-//        service.updateTelevision
-//        Optional<Television> optionalTelevision = repos.findById(id);
-//        if(optionalTelevision.isEmpty()) {
-//            throw new RecordNotFoundException("No television found with id: " + id);
-//        }
-//        Television television = optionalTelevision.get();
-//        television.setBrand(tv.getBrand());
-//        television.setType(tv.getType());
-//        television.setName(tv.getName());
-//        television.setPrice(tv.getPrice());
-//        repos.save(television);
-//        return new ResponseEntity<>((television.getName() + " added to inventory"), HttpStatus.OK);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, @PathVariable Long id, BindingResult br) {
+        if(br.hasFieldErrors()){
+            return ResponseEntity.badRequest().body(validationMessage(br).toString());
+        }
+        service.updateTelevision(id, televisionDtoInput);
+        return new ResponseEntity<>(("Updated tv at location: " + id), HttpStatus.OK);
+    }
+
+    private StringBuilder validationMessage(BindingResult br) {
+        StringBuilder sb = new StringBuilder();
+        for (FieldError fe : br.getFieldErrors()) {
+            sb.append(fe.getDefaultMessage());
+            sb.append("\n");
+        }
+        return sb;
+    }
 }
