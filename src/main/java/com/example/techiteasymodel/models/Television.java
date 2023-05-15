@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 
 @Getter
@@ -45,5 +46,9 @@ public class Television {
         this.brand = brand;
         this.name = name;
         this.price = price;
+    }
+
+    public void copyProperties(Television target) {
+        BeanUtils.copyProperties(target, this);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.techiteasymodel.contrlollers;
+package com.example.techiteasymodel.controllers;
 
 import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
@@ -63,12 +63,12 @@ public class TelevisionController {
         if(optionalTelevision.isEmpty()) {
             throw new RecordNotFoundException("No television found with id: " + id);
         }
+
         Television television = optionalTelevision.get();
-        television.setBrand(tv.getBrand());
-        television.setType(tv.getType());
-        television.setName(tv.getName());
-        television.setPrice(tv.getPrice());
+        tv.copyProperties(television);
+
         repos.save(television);
         return new ResponseEntity<>((television.getName() + " added to inventory"), HttpStatus.OK);
     }
+
 }
