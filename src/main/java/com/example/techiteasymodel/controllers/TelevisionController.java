@@ -1,9 +1,11 @@
-package com.example.techiteasymodel.contrlollers;
+package com.example.techiteasymodel.controllers;
 
 import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import com.example.techiteasymodel.models.Television;
 import com.example.techiteasymodel.repositories.TelevisionRepository;
+import com.example.techiteasymodel.services.TelevisionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +18,13 @@ import java.util.Optional;
 @RequestMapping("/televisions")
 public class TelevisionController {
 
-    private final TelevisionRepository repos;
+    private final TelevisionService service;
 
-    public TelevisionController(TelevisionRepository repos) {
-        this.repos = repos;
+    public TelevisionController(TelevisionService service){
+        this.service = service;
     }
+
+
 
 
     @GetMapping
