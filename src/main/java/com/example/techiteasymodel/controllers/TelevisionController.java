@@ -1,5 +1,7 @@
 package com.example.techiteasymodel.controllers;
 
+import com.example.techiteasymodel.dtos.TelevisionDtoInput;
+import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
 import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import com.example.techiteasymodel.models.Television;
@@ -25,38 +27,29 @@ public class TelevisionController {
     }
 
 
-
-
     @GetMapping
-    public ResponseEntity<Iterable<Television>> getTelevisions() {
-        return new ResponseEntity(repos.findAll(), HttpStatus.OK);
+    public ResponseEntity<Iterable<TelevisionDtoOutput>> getTelevisions() {
+        return new ResponseEntity(service.getTelevisions(), HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
     public ResponseEntity<Television> getTelevision(@PathVariable Long id) throws RecordNotFoundException {
-        Optional<Television> optionalTelevision = repos.findById(id);
-        if(optionalTelevision.isEmpty()) {
-            throw new RecordNotFoundException("No television found with id: " + id);
-        }
-        return new ResponseEntity(optionalTelevision.get(), HttpStatus.OK);
+        return new ResponseEntity(service.getTelevision(id), HttpStatus.OK);
     }
 
 
     @PostMapping
-    public ResponseEntity<Television> addTelevision(@RequestBody Television tv) throws IllegalNameLengthException {
-        if (tv.getName().length() > 20) {
-            throw new IllegalNameLengthException("Name cannot be longer than 20 chars.");
-        }
-        repos.save(tv);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + tv.getId()).toUriString());
-        return ResponseEntity.created(uri).body(tv);
+    public ResponseEntity<String> createTelevision(@RequestBody TelevisionDtoInput televisionDtoInput)  {
+        Television tv = service.createTelevision(televisionDtoInput);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionDtoInput.Id).toUriString());
+        return ResponseEntity.created(uri).body(tv.getName() + " created and added to inventory.");
     }
 
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteTelevision(@PathVariable Long id) {
-        repos.deleteById(id);
+        service.deleteTelevision(id);
         return ResponseEntity.noContent().build();
     }
 

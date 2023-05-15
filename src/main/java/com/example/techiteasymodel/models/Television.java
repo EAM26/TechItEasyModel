@@ -1,11 +1,14 @@
 package com.example.techiteasymodel.models;
 
+import com.example.techiteasymodel.dtos.TelevisionDtoInput;
+import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 
 @Getter
@@ -46,4 +49,14 @@ public class Television {
         this.name = name;
         this.price = price;
     }
+
+    public void copyProperties(TelevisionDtoOutput target) {
+        BeanUtils.copyProperties(this, target);
+    }
+
+//    public void copyAllProperties(TelevisionDtoInput televisionDtoInput) {
+//        BeanUtils.copyProperties(televisionDtoInput, this);
+//        System.out.println("test copy all: " + this.getName());
+//
+//    }
 }
