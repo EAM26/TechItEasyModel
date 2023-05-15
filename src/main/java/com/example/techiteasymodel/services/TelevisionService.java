@@ -40,14 +40,15 @@ public class TelevisionService {
         return convertTelevisionToDto(television);
     }
 
-    public Long deleteTelevision(Long id) {
+    public void deleteTelevision(Long id) {
         try {
             repos.deleteById(id);
         } catch (Exception e) {
             throw new RecordNotFoundException("No television found at location: " + id);
         }
-        return id;
     }
+
+
 
 
     // Below the private conversion methods for DTO to Television and vice versa

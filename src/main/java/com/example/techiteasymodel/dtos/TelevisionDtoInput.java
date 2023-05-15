@@ -1,6 +1,9 @@
 package com.example.techiteasymodel.dtos;
 
 import com.example.techiteasymodel.models.Television;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
 
@@ -8,10 +11,19 @@ import org.springframework.beans.BeanUtils;
 public class TelevisionDtoInput {
 
     public Long Id;
+
+    @NotBlank
     public String type;
+
+    @NotBlank
     public String brand;
+
+    @NotBlank
     public String name;
+
+    @NotNull
     public Double price;
+
     public Double refreshRate;
     public Double availableSize;
     public String screenType;
@@ -24,7 +36,5 @@ public class TelevisionDtoInput {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
-
-
 
 }
