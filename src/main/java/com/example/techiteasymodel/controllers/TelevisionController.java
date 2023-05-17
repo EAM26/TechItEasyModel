@@ -58,7 +58,7 @@ public class TelevisionController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, @PathVariable Long id, BindingResult br) {
+    public ResponseEntity<Object> updateTelevision(@PathVariable Long id, @RequestBody @Valid TelevisionDtoInput televisionDtoInput, BindingResult br) {
         System.out.println("test putmapping"); //Test message
         if(br.hasFieldErrors()){
             System.out.println("Test Controller updateTelevision "); // Test message
