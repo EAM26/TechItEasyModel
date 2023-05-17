@@ -2,13 +2,10 @@ package com.example.techiteasymodel.controllers;
 
 import com.example.techiteasymodel.dtos.TelevisionDtoInput;
 import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
-import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import com.example.techiteasymodel.models.Television;
-import com.example.techiteasymodel.repositories.TelevisionRepository;
 import com.example.techiteasymodel.services.TelevisionService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/televisions")
@@ -48,7 +44,8 @@ public class TelevisionController {
             return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
         Television tv = service.createTelevision(televisionDtoInput);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionDtoInput.Id).toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionDtoInput.id).toUriString());
+
         return ResponseEntity.created(uri).body(tv.getName() + " created and added to inventory.");
     }
 
@@ -61,9 +58,10 @@ public class TelevisionController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, @PathVariable Long id, BindingResult br) {
+    public ResponseEntity<Object> updateTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, @PathVariable Long id, BindingResult br) {
+        System.out.println("test putmapping"); //Test message
         if(br.hasFieldErrors()){
-            System.out.println("Test Controller updateTelevision ");
+            System.out.println("Test Controller updateTelevision "); // Test message
             return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
         service.updateTelevision(id, televisionDtoInput);
@@ -73,6 +71,7 @@ public class TelevisionController {
     private StringBuilder validationMessage(BindingResult br) {
         StringBuilder sb = new StringBuilder();
         for (FieldError fe : br.getFieldErrors()) {
+            sb.append(fe.getField() + " ");
             sb.append(fe.getDefaultMessage());
             sb.append("\n");
         }

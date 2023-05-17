@@ -1,6 +1,5 @@
 package com.example.techiteasymodel.models;
 
-import com.example.techiteasymodel.dtos.TelevisionDtoInput;
 import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +18,7 @@ public class Television {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     private String type;
     private String brand;
@@ -43,7 +42,7 @@ public class Television {
     }
 
     public Television(Long id, String type, String brand, String name, Double price) {
-        Id = id;
+        this.id = id;
         this.type = type;
         this.brand = brand;
         this.name = name;

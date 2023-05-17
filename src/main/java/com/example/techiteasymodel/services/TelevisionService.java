@@ -44,7 +44,7 @@ public class TelevisionService {
 
     public TelevisionDtoOutput getTelevision(Long id) {
         Television television = repos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
-//        return convertTelevisionToDto(television);
+
         return convertToDto(television);
     }
 
@@ -84,10 +84,8 @@ public class TelevisionService {
     // Below the private conversion methods for DTO to Television and vice versa
 
     public TelevisionDtoOutput convertToDto(Television television) {
-        TelevisionDtoOutput televisionDtoOutput = new TelevisionDtoOutput();
         this.mapper = new ModelMapper();
-        televisionDtoOutput = this.mapper.map(television, TelevisionDtoOutput.class);
-        return televisionDtoOutput;
+        return this.mapper.map(television, TelevisionDtoOutput.class);
     }
 
     public Television convertToTelevision(TelevisionDtoInput televisionDtoInput) {
@@ -98,7 +96,7 @@ public class TelevisionService {
 //    private TelevisionDtoOutput convertTelevisionToDto(Television television) {
 //        TelevisionDtoOutput televisionDtoOutput = new TelevisionDtoOutput();
 //
-//        televisionDtoOutput.Id = television.getId();
+//        televisionDtoOutput.id = television.getId();
 //        televisionDtoOutput.brand = television.getBrand();
 //        televisionDtoOutput.type = television.getType();
 //        televisionDtoOutput.name = television.getName();

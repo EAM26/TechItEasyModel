@@ -3,7 +3,6 @@ package com.example.techiteasymodel.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,18 +15,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TelevisionDtoInput {
 
-    public Long Id;
+    public Long id;
 
-//    @NotBlank
+    @NotBlank
     public String type;
 
-//    @NotBlank
+    @NotBlank
     public String brand;
 
-//    @NotBlank
+    @NotBlank
     public String name;
 
-//    @NotNull
+    @NotNull
     public Double price;
 
     public Double refreshRate;
