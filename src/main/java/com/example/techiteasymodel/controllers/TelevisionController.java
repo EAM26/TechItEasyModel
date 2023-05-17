@@ -63,6 +63,7 @@ public class TelevisionController {
     @PutMapping("/{id}")
     public ResponseEntity<String> updateTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, @PathVariable Long id, BindingResult br) {
         if(br.hasFieldErrors()){
+            System.out.println("Test Controller updateTelevision ");
             return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
         service.updateTelevision(id, televisionDtoInput);

@@ -1,29 +1,33 @@
 package com.example.techiteasymodel.dtos;
 
-import com.example.techiteasymodel.models.Television;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.BeanUtils;
+
 
 @Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TelevisionDtoInput {
 
     public Long Id;
 
-    @NotBlank
+//    @NotBlank
     public String type;
 
-    @NotBlank
+//    @NotBlank
     public String brand;
 
-    @NotBlank
+//    @NotBlank
     public String name;
 
-    @NotNull
+//    @NotNull
     public Double price;
 
     public Double refreshRate;

@@ -1,8 +1,12 @@
 package com.example.techiteasymodel.dtos;
 
-import com.example.techiteasymodel.models.Television;
-import org.springframework.beans.BeanUtils;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 public class TelevisionDtoOutput {
     public Long Id;
 
@@ -22,6 +26,5 @@ public class TelevisionDtoOutput {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
-
 
 }
