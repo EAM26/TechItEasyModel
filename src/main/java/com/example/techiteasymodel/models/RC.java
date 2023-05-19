@@ -21,6 +21,8 @@ public class RC {
     private Double price;
     private Integer originalStock;
 
+//    @OneToOne(mappedBy = "rc")
+//    private Television television;
 
 
 }

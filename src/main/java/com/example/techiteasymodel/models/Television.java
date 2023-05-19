@@ -34,6 +34,10 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "rcs", nullable = false)
+//    private RC rc;
+
 
     public Television() {
     }
@@ -46,13 +50,4 @@ public class Television {
         this.price = price;
     }
 
-    public void copyProperties(TelevisionOutputDto target) {
-        BeanUtils.copyProperties(this, target);
-    }
-
-//    public void copyAllProperties(TelevisionInputDto televisionDtoInput) {
-//        BeanUtils.copyProperties(televisionDtoInput, this);
-//        System.out.println("test copy all: " + this.getName());
-//
-//    }
 }

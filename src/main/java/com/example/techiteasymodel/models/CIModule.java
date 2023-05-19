@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="ci-modules")
+@Table(name="ci_modules")
 
 public class CIModule {
 
