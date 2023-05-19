@@ -1,0 +1,14 @@
+package com.example.techiteasymodel.dtos;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class CIModuleOutputDto {
+
+    private Long id;
+    private String name;
+    private String type;
+    private Double price;
+}

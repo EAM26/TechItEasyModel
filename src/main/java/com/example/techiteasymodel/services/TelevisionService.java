@@ -42,7 +42,6 @@ public class TelevisionService {
 
     public TelevisionOutputDto getTelevision(Long id) {
         Television television = repos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
-
         return convertToDto(television);
     }
 
