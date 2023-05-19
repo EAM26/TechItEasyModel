@@ -1,10 +1,7 @@
 package com.example.techiteasymodel.models;
 
 import com.example.techiteasymodel.dtos.TelevisionOutputDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.BeanUtils;
@@ -17,7 +14,7 @@ import org.springframework.beans.BeanUtils;
 public class Television {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String type;
