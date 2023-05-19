@@ -1,7 +1,7 @@
 package com.example.techiteasymodel.controllers;
 
-import com.example.techiteasymodel.dtos.TelevisionDtoInput;
-import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
+import com.example.techiteasymodel.dtos.TelevisionInputDto;
+import com.example.techiteasymodel.dtos.TelevisionOutputDto;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import com.example.techiteasymodel.models.Television;
 import com.example.techiteasymodel.services.TelevisionService;
@@ -27,7 +27,7 @@ public class TelevisionController {
 
 
     @GetMapping
-    public ResponseEntity<Iterable<TelevisionDtoOutput>> getTelevisions() {
+    public ResponseEntity<Iterable<TelevisionOutputDto>> getTelevisions() {
         return new ResponseEntity(service.getTelevisions(), HttpStatus.OK);
     }
 
@@ -39,12 +39,12 @@ public class TelevisionController {
 
 
     @PostMapping
-    public ResponseEntity<String> createTelevision(@RequestBody @Valid TelevisionDtoInput televisionDtoInput, BindingResult br) {
+    public ResponseEntity<String> createTelevision(@RequestBody @Valid TelevisionInputDto televisionInputDto, BindingResult br) {
         if (br.hasFieldErrors()) {
             return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
-        Television tv = service.createTelevision(televisionDtoInput);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionDtoInput.id).toUriString());
+        Television tv = service.createTelevision(televisionInputDto);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentRequest().path("/" + televisionInputDto.id).toUriString());
 
         return ResponseEntity.created(uri).body(tv.getName() + " created and added to inventory.");
     }
@@ -58,13 +58,13 @@ public class TelevisionController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateTelevision(@PathVariable Long id, @RequestBody @Valid TelevisionDtoInput televisionDtoInput, BindingResult br) {
+    public ResponseEntity<Object> updateTelevision(@PathVariable Long id, @RequestBody @Valid TelevisionInputDto televisionInputDto, BindingResult br) {
         System.out.println("test putmapping"); //Test message
         if(br.hasFieldErrors()){
             System.out.println("Test Controller updateTelevision "); // Test message
             return ResponseEntity.badRequest().body(validationMessage(br).toString());
         }
-        service.updateTelevision(id, televisionDtoInput);
+        service.updateTelevision(id, televisionInputDto);
         return new ResponseEntity<>(("Updated tv at location: " + id), HttpStatus.OK);
     }
 

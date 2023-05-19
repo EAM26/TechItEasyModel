@@ -13,7 +13,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelevisionDtoInput {
+public class TelevisionInputDto {
 
     public Long id;
 

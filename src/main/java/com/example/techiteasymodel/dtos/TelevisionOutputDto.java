@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class TelevisionDtoOutput {
+public class TelevisionOutputDto {
     public Long id;
 
     public String type;

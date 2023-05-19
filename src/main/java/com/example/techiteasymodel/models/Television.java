@@ -1,6 +1,6 @@
 package com.example.techiteasymodel.models;
 
-import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
+import com.example.techiteasymodel.dtos.TelevisionOutputDto;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -49,11 +49,11 @@ public class Television {
         this.price = price;
     }
 
-    public void copyProperties(TelevisionDtoOutput target) {
+    public void copyProperties(TelevisionOutputDto target) {
         BeanUtils.copyProperties(this, target);
     }
 
-//    public void copyAllProperties(TelevisionDtoInput televisionDtoInput) {
+//    public void copyAllProperties(TelevisionInputDto televisionDtoInput) {
 //        BeanUtils.copyProperties(televisionDtoInput, this);
 //        System.out.println("test copy all: " + this.getName());
 //

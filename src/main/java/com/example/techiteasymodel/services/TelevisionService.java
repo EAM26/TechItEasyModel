@@ -1,17 +1,15 @@
 package com.example.techiteasymodel.services;
 
-import com.example.techiteasymodel.dtos.TelevisionDtoInput;
-import com.example.techiteasymodel.dtos.TelevisionDtoOutput;
+import com.example.techiteasymodel.dtos.TelevisionInputDto;
+import com.example.techiteasymodel.dtos.TelevisionOutputDto;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import com.example.techiteasymodel.models.Television;
 import com.example.techiteasymodel.repositories.TelevisionRepository;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TelevisionService {
@@ -28,21 +26,21 @@ public class TelevisionService {
         this.mapper = new ModelMapper();
     }
 
-    public Iterable<TelevisionDtoOutput> getTelevisions() {
-        List<TelevisionDtoOutput> televisionDtos = new ArrayList<>();
+    public Iterable<TelevisionOutputDto> getTelevisions() {
+        List<TelevisionOutputDto> televisionDtos = new ArrayList<>();
         for (Television television: repos.findAll()) {
             televisionDtos.add(this.convertToDto(television));
         }
         return televisionDtos;
     }
 
-    public Television createTelevision(TelevisionDtoInput televisionDtoInput) {
-        Television createdTelevision = this.convertToTelevision(televisionDtoInput);
+    public Television createTelevision(TelevisionInputDto televisionInputDto) {
+        Television createdTelevision = this.convertToTelevision(televisionInputDto);
         repos.save(createdTelevision);
         return createdTelevision;
     }
 
-    public TelevisionDtoOutput getTelevision(Long id) {
+    public TelevisionOutputDto getTelevision(Long id) {
         Television television = repos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
 
         return convertToDto(television);
@@ -57,23 +55,23 @@ public class TelevisionService {
     }
 
 
-    public void updateTelevision(Long id, TelevisionDtoInput televisionDtoInput) {
+    public void updateTelevision(Long id, TelevisionInputDto televisionInputDto) {
         System.out.println("Test Service update Television");
         Television television = repos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
-        if(televisionDtoInput.getName() != null) {
+        if(televisionInputDto.getName() != null) {
             System.out.println("has name");
-            television.setName(televisionDtoInput.getName());
+            television.setName(televisionInputDto.getName());
         } else {
             System.out.println("No name");
         }
-        if(televisionDtoInput.getBrand() != null) {
-            television.setBrand(televisionDtoInput.getBrand());
+        if(televisionInputDto.getBrand() != null) {
+            television.setBrand(televisionInputDto.getBrand());
         }
-        if(televisionDtoInput.getType() != null) {
-            television.setType(televisionDtoInput.getType());
+        if(televisionInputDto.getType() != null) {
+            television.setType(televisionInputDto.getType());
         }
-        if(televisionDtoInput.getPrice() != null) {
-            television.setPrice(televisionDtoInput.getPrice());
+        if(televisionInputDto.getPrice() != null) {
+            television.setPrice(televisionInputDto.getPrice());
         }
         repos.save(television);
     }
@@ -83,18 +81,18 @@ public class TelevisionService {
 
     // Below the private conversion methods for DTO to Television and vice versa
 
-    public TelevisionDtoOutput convertToDto(Television television) {
+    public TelevisionOutputDto convertToDto(Television television) {
         this.mapper = new ModelMapper();
-        return this.mapper.map(television, TelevisionDtoOutput.class);
+        return this.mapper.map(television, TelevisionOutputDto.class);
     }
 
-    public Television convertToTelevision(TelevisionDtoInput televisionDtoInput) {
+    public Television convertToTelevision(TelevisionInputDto televisionInputDto) {
         this.mapper = new ModelMapper();
-        return this.mapper.map(televisionDtoInput, Television.class);
+        return this.mapper.map(televisionInputDto, Television.class);
 
     }
-//    private TelevisionDtoOutput convertTelevisionToDto(Television television) {
-//        TelevisionDtoOutput televisionDtoOutput = new TelevisionDtoOutput();
+//    private TelevisionOutputDto convertTelevisionToDto(Television television) {
+//        TelevisionOutputDto televisionDtoOutput = new TelevisionOutputDto();
 //
 //        televisionDtoOutput.id = television.getId();
 //        televisionDtoOutput.brand = television.getBrand();
@@ -118,7 +116,7 @@ public class TelevisionService {
 //
 //    }
 
-//    private Television convertDtoToTelevision(TelevisionDtoInput televisionDtoInput) {
+//    private Television convertDtoToTelevision(TelevisionInputDto televisionDtoInput) {
 //        Television television = new Television();
 //        television.setBrand(televisionDtoInput.brand);
 //        television.setType(televisionDtoInput.type);
