@@ -1,6 +1,7 @@
 package com.example.techiteasymodel.dtos;
 
 
+import com.example.techiteasymodel.models.RC;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,6 @@ public class TelevisionOutputDto {
     public Boolean ambiLight;
     public Integer originalStock;
     public Integer sold;
+    RC rc;
 
 }

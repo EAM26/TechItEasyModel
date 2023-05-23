@@ -1,5 +1,6 @@
 package com.example.techiteasymodel.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="remotecontrollers")
+@Table(name = "remotecontrollers")
 public class RC {
 
     @Id
@@ -21,8 +22,9 @@ public class RC {
     private Double price;
     private Integer originalStock;
 
-//    @OneToOne(mappedBy = "rc")
-//    private Television television;
+    @OneToOne(mappedBy = "rc")
+    @JsonIgnore
+    Television television;
 
 
 }

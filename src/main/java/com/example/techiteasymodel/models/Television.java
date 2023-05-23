@@ -34,9 +34,8 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "rcs", nullable = false)
-//    private RC rc;
+    @OneToOne
+    RC rc;
 
 
     public Television() {

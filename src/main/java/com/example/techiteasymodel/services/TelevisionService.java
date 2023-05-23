@@ -25,16 +25,16 @@ public class TelevisionService {
         this.rcRepos = rcRepos;
     }
 
-//    public void assignRemoteControllerToTelevision(Long id, Long rcId) {
-//        Television tv = televisionRepos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
-//        RC rc = rcRepos.findById(rcId).orElseThrow(() -> new RecordNotFoundException("No RC found at location: " + rcId));
-//        tv.setRc(rc);
-//        televisionRepos.save(tv);
-//    }
+    public void assignRemoteControllerToTelevision(Long tvId, Long rcId) {
+        Television tv = televisionRepos.findById(tvId).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + tvId));
+        RC rc = rcRepos.findById(rcId).orElseThrow(() -> new RecordNotFoundException("No RC found at location: " + rcId));
+        tv.setRc(rc);
+        televisionRepos.save(tv);
+    }
 
     public Iterable<TelevisionOutputDto> getTelevisions() {
         List<TelevisionOutputDto> televisionDtos = new ArrayList<>();
-        for (Television television: televisionRepos.findAll()) {
+        for (Television television : televisionRepos.findAll()) {
             televisionDtos.add(this.convertToDto(television));
         }
         return televisionDtos;
@@ -63,25 +63,23 @@ public class TelevisionService {
     public void updateTelevision(Long id, TelevisionInputDto televisionInputDto) {
         System.out.println("Test Service update Television");
         Television television = televisionRepos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
-        if(televisionInputDto.getName() != null) {
+        if (televisionInputDto.getName() != null) {
             System.out.println("has name");
             television.setName(televisionInputDto.getName());
         } else {
             System.out.println("No name");
         }
-        if(televisionInputDto.getBrand() != null) {
+        if (televisionInputDto.getBrand() != null) {
             television.setBrand(televisionInputDto.getBrand());
         }
-        if(televisionInputDto.getType() != null) {
+        if (televisionInputDto.getType() != null) {
             television.setType(televisionInputDto.getType());
         }
-        if(televisionInputDto.getPrice() != null) {
+        if (televisionInputDto.getPrice() != null) {
             television.setPrice(televisionInputDto.getPrice());
         }
         televisionRepos.save(television);
     }
-
-
 
 
     // Below the private conversion methods for DTO to Television and vice versa

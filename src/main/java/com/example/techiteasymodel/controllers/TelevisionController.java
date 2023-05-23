@@ -68,6 +68,12 @@ public class TelevisionController {
         return new ResponseEntity<>(("Updated tv at location: " + id), HttpStatus.OK);
     }
 
+    @PutMapping("/{id}/remotecontroller/{rcId}")
+    public ResponseEntity<Object> assignRemoteControllerToTelevision(@PathVariable("id") Long tvId, @PathVariable Long rcId) {
+        service.assignRemoteControllerToTelevision(tvId, rcId);
+        return new ResponseEntity("test", HttpStatus.OK);
+    }
+
     private StringBuilder validationMessage(BindingResult br) {
         StringBuilder sb = new StringBuilder();
         for (FieldError fe : br.getFieldErrors()) {
