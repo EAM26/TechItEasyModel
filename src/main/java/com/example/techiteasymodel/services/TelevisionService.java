@@ -10,6 +10,7 @@ import com.example.techiteasymodel.repositories.TelevisionRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +64,29 @@ public class TelevisionService {
     public void updateTelevision(Long id, TelevisionInputDto televisionInputDto) {
         System.out.println("Test Service update Television");
         Television television = televisionRepos.findById(id).orElseThrow(() -> new RecordNotFoundException("No television found at location: " + id));
+
+//        Class<?> objClass = televisionInputDto.getClass();
+//        Field[] fields = objClass.getDeclaredFields();
+//
+//        for (Field field : fields) {
+//            field.setAccessible(true); // Enable access to private fields
+//            String fieldName = field.getName();
+//
+//            try {
+//                Object fieldValue = field.get(televisionInputDto);
+//                if (fieldValue == null) {
+//                    System.out.println(fieldName + " has value null and can be skipped.");
+//                } else {
+//                    System.out.println(fieldName + " has value: " + fieldValue);
+//                }
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
+
+
         if (televisionInputDto.getName() != null) {
             System.out.println("has name");
             television.setName(televisionInputDto.getName());

@@ -1,5 +1,6 @@
 package com.example.techiteasymodel.dtos;
 
+import com.example.techiteasymodel.models.Television;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,4 +15,5 @@ public class RCOutputDto {
     private String brand;
     private Double price;
     private Integer originalStock;
+    Television television;
 }

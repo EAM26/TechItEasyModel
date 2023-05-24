@@ -1,6 +1,7 @@
 package com.example.techiteasymodel.models;
 
 import com.example.techiteasymodel.dtos.TelevisionOutputDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,7 @@ import org.springframework.beans.BeanUtils;
 @Getter
 @Setter
 @Entity
-@Table(name="televisions")
+@Table(name = "televisions")
 public class Television {
 
     @Id
@@ -35,6 +36,7 @@ public class Television {
     private Integer sold;
 
     @OneToOne
+    @JsonIgnore
     RC rc;
 
 
