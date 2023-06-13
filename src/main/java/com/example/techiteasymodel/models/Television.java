@@ -1,22 +1,22 @@
 package com.example.techiteasymodel.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.techiteasymodel.dtos.TelevisionOutputDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.BeanUtils;
 
 
 @Getter
 @Setter
 @Entity
-@Table(name="televisions")
+@Table(name = "televisions")
 public class Television {
 
     @Id
-    @GeneratedValue
-    private Long Id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String type;
     private String brand;
@@ -35,15 +35,20 @@ public class Television {
     private Integer originalStock;
     private Integer sold;
 
+    @OneToOne
+    @JsonIgnore
+    RC rc;
+
 
     public Television() {
     }
 
     public Television(Long id, String type, String brand, String name, Double price) {
-        Id = id;
+        this.id = id;
         this.type = type;
         this.brand = brand;
         this.name = name;
         this.price = price;
     }
+
 }

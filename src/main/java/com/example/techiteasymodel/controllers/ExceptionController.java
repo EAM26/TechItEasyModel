@@ -1,4 +1,4 @@
-package com.example.techiteasymodel.contrlollers;
+package com.example.techiteasymodel.controllers;
 
 
 import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 
 @ControllerAdvice
 public class ExceptionController {
