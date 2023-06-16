@@ -8,6 +8,9 @@ import com.example.techiteasymodel.models.Authority;
 import com.example.techiteasymodel.models.User;
 import com.example.techiteasymodel.repositories.UserRepository;
 import com.example.techiteasymodel.utils.RandomStringGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,6 +22,10 @@ import java.util.Set;
 @Service
 public class UserService {
     private final UserRepository userRepository;
+
+    @Autowired
+    @Lazy
+    private PasswordEncoder passwordEncoder;
     /*inject de juiste repository*/
 
     public UserService(UserRepository userRepository) {
@@ -112,6 +119,7 @@ public class UserService {
         user.setEnabled(userDto.getEnabled());
         user.setApikey(userDto.getApikey());
         user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 
         return user;
     }

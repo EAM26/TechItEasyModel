@@ -1,8 +1,6 @@
 package com.example.techiteasymodel.dtos;
 
 import com.example.techiteasymodel.models.Authority;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 
 import java.util.Set;
 
@@ -13,7 +11,7 @@ public class UserDto {
     public Boolean enabled;
     public String apikey;
     public String email;
-    @JsonSerialize
+
     public Set<Authority> authorities;
 
     public String getUsername() {

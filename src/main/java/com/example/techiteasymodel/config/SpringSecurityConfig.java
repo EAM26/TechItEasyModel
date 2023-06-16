@@ -72,6 +72,7 @@ public class SpringSecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/remotecontrollers").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/remotecontrollers/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/televisions").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/televisions").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/televisions/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/wallbrackets").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/wallbrackets/**").hasRole("ADMIN")
