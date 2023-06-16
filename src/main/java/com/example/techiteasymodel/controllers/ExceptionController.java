@@ -1,10 +1,12 @@
 package com.example.techiteasymodel.controllers;
 
 
+import com.example.techiteasymodel.exceptions.BadRequestException;
 import com.example.techiteasymodel.exceptions.IllegalNameLengthException;
 import com.example.techiteasymodel.exceptions.RecordNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -25,5 +27,26 @@ public class ExceptionController {
     public ResponseEntity<Object> exceptionIllegalNameLength(IllegalNameLengthException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_ACCEPTABLE);
     }
+
+
+
+
+
+
+
+
+
+
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<String> exception(BadRequestException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    public ResponseEntity<String> exception(UsernameNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+
 
 }
